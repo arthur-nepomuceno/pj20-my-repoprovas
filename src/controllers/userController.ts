@@ -5,14 +5,14 @@ import { NewUser } from "../types/userTypes"
 async function createUser(req: Request, res: Response) {
     const { email, password, confirm }: NewUser = req.body;
 
-    //Serviços:
-    //verificar se o email está disponível
+    await userServices.checkEmailAvailability(email)
     await userServices.confirmPassword(password, confirm)
-    //criptografar a senha antes de registrar no banco de dados
-    //registrar usuário no banco de dados
+    
+    const secret = await userServices.hidePassword(password);
+    await userServices.createUser(email, secret);
+    const user = await userServices.getUserByEmail(email)
 
-
-    return res.status(201).send('crete user ok')
+    return res.status(201).send({id: user.id, email: user.email})
 }
 
 export {

@@ -1,10 +1,10 @@
-interface NewUser {
+type NewUser = {
     email: string,
     password: string,
     confirm: string
 }
 
-interface User {
+type User = {
     id: number,
     email: string,
     password: string

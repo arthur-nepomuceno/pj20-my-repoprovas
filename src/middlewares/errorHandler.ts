@@ -1,7 +1,8 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 
-export default function errorHandler(error: Error, req: Request, res: Response) {
-    console.log(error);
+export default function errorHandler(error: Error | any, req: Request, res: Response, next: NextFunction) {
+
+    const { type, message } = error;
 
     const status = {
         bad_request: 400,
@@ -12,7 +13,8 @@ export default function errorHandler(error: Error, req: Request, res: Response) 
         unprocessable_entity: 422
     }
 
-    //const {type, message} = error;
+    if (type === 'invalid_email') return res.status(status.conflict).send(message);
+    if (type === 'password_and_confirm_password_do_not_match') return res.status(status.not_acceptable).send(message);
 
-    res.status(500).send(`Unexpected server error: ${error}.`)
+    return res.status(500).send(`Unexpected server error: ${error}.`)
 }
