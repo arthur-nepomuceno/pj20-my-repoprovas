@@ -3,6 +3,6 @@ import { createUser } from "../controllers/usersController";
 
 const userRouter = Router();
 
-userRouter.post('/signin', createUser)
+userRouter.post('/signup', createUser)
 
 export default userRouter

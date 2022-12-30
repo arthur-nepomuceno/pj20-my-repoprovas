@@ -1,8 +1,13 @@
 import bcrypt from "bcrypt";
 
-async function confirmPassword(password: string, confirmPassword: string) {
+async function checkEmail(email:string) {
+    //buscar email no banco de dados
+    //se houver email, retornar erro
+}
+
+async function confirmPassword(password: string, confirm: string) {
     
-    const check = password === confirmPassword;
+    const check = password === confirm;
 
     if(!check) throw {
         type: 'password_and_confirm_password_do_not_match',
