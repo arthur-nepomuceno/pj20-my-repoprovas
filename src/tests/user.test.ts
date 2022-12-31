@@ -1,6 +1,6 @@
 import app from "../app";
 import supertest from "supertest";
-import { newUser } from "./factories/userFactory";
+import { newUser,  } from "./factories/userFactory";
 import prisma from "../databases/db";
 
 const agent = supertest(app);
@@ -53,9 +53,39 @@ describe(`
     END-POINT: post/signin
     TEST: login user.
 `, () => {
-    it.todo('Must return status 200 for a successful login AND return a token.')
+    it('Must return status 200 for a successful login AND return a token.', async () => {
+        const body = await newUser();
+        await agent.post('/signup').send(body);
+        
+        const response = await agent.post('/signin').send({
+            email: body.email,
+            password: body.password
+        });
 
-    it.todo('Must return status 401 if password in incorrect.')
+        expect(response.statusCode).toBe(200);
+        expect(response.body.token).not.toBeNull();
+    })
+
+    it('Must return status 401 for an unknown email.', async () => {
+        const response = await agent.post('/signin').send({
+            email: 'unknown_email@email.com',
+            password: 'whatever_password'
+        })
+
+        expect(response.statusCode).toBe(401);
+    })
+
+    it('Must return status 401 if password is incorrect.', async () => {
+        const body = await newUser();
+        await agent.post('/signup').send(body);
+
+        const response = await agent.post('/signin').send({
+            email: body.email,
+            password: 'purposely_wrong_password'
+        })
+
+        expect(response.statusCode).toBe(401);
+    })
 })
 
 afterAll( async () => {

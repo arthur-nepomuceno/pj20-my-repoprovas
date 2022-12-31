@@ -6,7 +6,7 @@ async function checkEmailAvailability(email: string) {
 
     if (response) throw {
         type: "invalid_email",
-        message: "_this email is already in use_"
+        message: "_This email is already in use_"
     }
 
     return;
@@ -29,10 +29,6 @@ async function hidePassword(password: string) {
     return secret;
 }
 
-async function showPassword(secret: string) {
-    return;
-}
-
 async function createUser(email: string, password: string) {
     await userRepository.insertUser(email, password);
 
@@ -40,14 +36,39 @@ async function createUser(email: string, password: string) {
 }
 
 async function getUserByEmail(email: string) {
-    return await userRepository.findUserByEmailAddress(email);
+    const user = await userRepository.findUserByEmailAddress(email);
+    return {id: user.id, email: user.email};
+}
+
+async function checkEmailRegister(email: string) {
+    const response = await userRepository.findUserByEmailAddress(email);
+
+    if(!response) throw {
+        type: "unknown_email",
+        message: "_Unknown email. Please register first and try to access again_"
+    }
+
+    return;
+}
+
+async function checkPassword(email: string, password: string) {
+    const response = await userRepository.findUserByEmailAddress(email)
+    const check = bcrypt.compareSync(password, response.password);
+
+    if(!check) throw {
+        type: "invalid_password",
+        message: "_Please type your password correctly_"
+    }
+
+    return;
 }
 
 export {
     checkEmailAvailability,
     confirmPassword,
     hidePassword,
-    showPassword,
     createUser,
-    getUserByEmail
+    getUserByEmail,
+    checkEmailRegister,
+    checkPassword
 }
