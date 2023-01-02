@@ -1,6 +1,12 @@
 import prisma from "../src/databases/db"
 
 async function main() {
+    await prisma.$executeRaw`TRUNCATE TABLE terms RESTART IDENTITY CASCADE`
+    await prisma.$executeRaw`TRUNCATE TABLE categories RESTART IDENTITY CASCADE`
+    await prisma.$executeRaw`TRUNCATE TABLE teachers RESTART IDENTITY CASCADE`
+    await prisma.$executeRaw`TRUNCATE TABLE disciplines RESTART IDENTITY CASCADE`
+    await prisma.$executeRaw`TRUNCATE TABLE "teachersDisciplines" RESTART IDENTITY CASCADE`
+
     await prisma.terms.createMany({
         data: [
             {number: 1},

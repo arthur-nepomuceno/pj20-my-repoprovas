@@ -1,4 +1,5 @@
 import prisma from "../databases/db";
+import { NewTest } from "../types/testTypes";
 
 async function findCategoryById(id: number) {
     return prisma.categories.findFirst({
@@ -8,6 +9,22 @@ async function findCategoryById(id: number) {
     })
 }
 
+async function findTeacherDisciplineById(id: number) {
+    return prisma.teachersDisciplines.findFirst({
+        where: {
+            id
+        }
+    })
+}
+
+async function insertTest(test: NewTest) {
+    return await prisma.tests.create({
+        data: test
+    })
+}
+
 export {
-    findCategoryById
+    findCategoryById,
+    findTeacherDisciplineById,
+    insertTest
 }
