@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { ObjectSchema } from "joi";
 
-export default function checkSchema(schema: ObjectSchema){
+export function checkSchema(schema: ObjectSchema){
     
     return (req: Request, res: Response, next: NextFunction) => {
         const body = req.body;
