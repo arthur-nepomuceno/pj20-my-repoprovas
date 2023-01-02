@@ -8,6 +8,9 @@
     "start": "node src/server.ts",
     "dev": "nodemon src/server.ts"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -29,6 +32,7 @@
     "@types/jest": "^29.2.4",
     "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^9.0.0",
+    "@types/node": "^18.11.18",
     "@types/supertest": "^2.0.12",
     "bcrypt": "^5.1.0",
     "dotenv-cli": "^6.0.0",
