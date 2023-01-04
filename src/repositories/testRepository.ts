@@ -23,8 +23,13 @@ async function insertTest(test: NewTest) {
     })
 }
 
+async function findTests() {
+    return await prisma.tests.findMany();
+}
+
 export {
     findCategoryById,
     findTeacherDisciplineById,
-    insertTest
+    insertTest,
+    findTests
 }

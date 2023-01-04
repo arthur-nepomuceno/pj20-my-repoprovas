@@ -27,8 +27,14 @@ async function addTest(test: NewTest) {
     return testRepository.insertTest(test);
 }
 
+async function getTestsGroupedByDiscipline() {
+    const response = testRepository.findTests()
+    return response;
+}
+
 export {
     checkCategoryId,
     checkTeacherDisciplineId,
-    addTest
+    addTest,
+    getTestsGroupedByDiscipline
 }
