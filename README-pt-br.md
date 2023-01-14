@@ -35,7 +35,7 @@ Este projeto tem por objetivo desenvolver a habilidade de criação de testes de
    - _users_: tabela de registro para os usuários do sistema. Cada pessoa deve se registrar antes de ter aceso as demais funcionalidades.
    - _tests_: tabela que guarda as informações dos testes registrados pelos usuários.
    - _teachers_: tabela para registro dos professores.
-   - _disciplines_: tabela para registros das disciplinas as quais os tests pertences.
+   - _disciplines_: tabela para registros das disciplinas as quais os testes pertences.
    - _categories_: tabela de registros das categorias as quais os testes podem pertencer.
    - _teachersDisciplines_: tabela que registra qual professor(a) ministra qual disciplina.
    
