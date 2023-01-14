@@ -2,17 +2,29 @@ import app from "../app";
 import supertest from "supertest";
 import { newTest } from "./factories/testFactory";
 import { newUser } from "./factories/userFactory";
+import { LoginUser } from "../types/userTypes";
 import prisma from "../databases/db";
 
 const agent = supertest(app)
+const test = newTest()
+const user = newUser()
+async function newToken(user: LoginUser) {
+    await agent.post('/signup').send(user);
+    const login = await agent.post('/signin').send({
+        email: user.email,
+        password: user.password
+    })
+
+    const { token } = login.body;
+
+    return token
+}
+
 
 beforeEach(async () => {
     await prisma.$executeRaw`TRUNCATE TABLE tests RESTART IDENTITY CASCADE`
     await prisma.$executeRaw`TRUNCATE TABLE users`
 })
-
-const test = newTest();
-const user = newUser();
 
 describe(`
     END-POINT: post/test
@@ -21,14 +33,16 @@ describe(`
 
     it('Must return status 201 on adding a new test to the database.', async () => {
 
-        const response = await agent.post('/test').send(test)
+        const token = await newToken(user);
+        const response = await agent.post('/test').set('Authorization', `Bearer ${token}`).send(test)
 
         expect(response.statusCode).toBe(201)
     })
 
     it('Must return status 422 on trying to add a test of a category that does not exist.', async () => {
 
-        const response = await agent.post('/test').send({
+        const token = await newToken(user);
+        const response = await agent.post('/test').set('Authorization', `Bearer ${token}`).send({
             name: test.name,
             pdfUrl: test.pdfUrl,
             categoryId: 99,
@@ -41,7 +55,8 @@ describe(`
 
     it('Must return status 422 on trying to add a test from teacher/discipline that does not exist.', async () => {
 
-        const response = await agent.post('/test').send({
+        const token = await newToken(user);
+        const response = await agent.post('/test').set('Authorization', `Bearer ${token}`).send({
             name: test.name,
             pdfUrl: test.pdfUrl,
             categoryId: test.categoryId,
@@ -80,6 +95,7 @@ describe(`
         const response = await agent.get('/tests/disciplines').set('Authorization', `Bearer ${token}`)
 
         expect(response.statusCode).toBe(200);
+        expect(response.body).not.toBeNull();
     })
 
 })

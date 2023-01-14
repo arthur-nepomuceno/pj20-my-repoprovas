@@ -10,7 +10,13 @@ type User = {
     password: string
 }
 
+type LoginUser = {
+    email: string,
+    password: string
+}
+
 export {
     NewUser,
-    User
+    User,
+    LoginUser
 }

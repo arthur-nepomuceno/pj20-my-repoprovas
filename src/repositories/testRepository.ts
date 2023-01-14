@@ -24,7 +24,45 @@ async function insertTest(test: NewTest) {
 }
 
 async function findTests() {
-    return await prisma.tests.findMany();
+    return await prisma.tests.findMany({
+        select: {
+            name: true,
+            pdfUrl: true,
+            categories: {
+                select: {
+                    name: true
+                }
+            },
+            teachersDisciplines: {
+                select: {
+                    teachers: {
+                        select: {
+                            name: true
+                        }
+                    },
+                    disciplines: {
+                        select: {
+                            name: true,
+                            terms: {
+                                select: {
+                                    number: true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        orderBy: {
+            teachersDisciplines: {
+                disciplines: {
+                    terms: {
+                        number: 'asc'
+                    }
+                }
+            }
+        }
+    });
 }
 
 export {

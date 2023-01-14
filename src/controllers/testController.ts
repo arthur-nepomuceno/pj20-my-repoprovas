@@ -4,7 +4,9 @@ import { checkToken } from "../utilities/token"
 
 async function addTest(req: Request, res: Response) {
     const { name, pdfUrl, categoryId, teacherDisciplineId } = req.body
-
+    const token = req.headers.authorization.replace(/Bearer |'/g, '')
+    
+    await checkToken(token);
     await testServices.checkCategoryId(categoryId);
     await testServices.checkTeacherDisciplineId(teacherDisciplineId);
     await testServices.addTest({
@@ -26,7 +28,17 @@ async function getTestsGroupedByDiscipline(req: Request, res: Response) {
     return res.status(200).send(tests);
 }
 
+async function getTestsGroupedByTeachers(req: Request, res: Response) {
+    const token = req.headers.authorization.replace(/Bearer |'/g, '');
+    await checkToken(token);
+
+    const tests = await testServices.getTestsGroupedByTeacher()
+
+    return res.status(200).send(tests);
+}
+
 export {
     addTest,
-    getTestsGroupedByDiscipline
+    getTestsGroupedByDiscipline,
+    getTestsGroupedByTeachers
 }
