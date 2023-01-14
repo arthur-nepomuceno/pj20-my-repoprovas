@@ -13,7 +13,7 @@
 
 ## Start Here
 
-Este projeto tem por objetivo desenvolver a habilidade de criação de testes de integração. Para seu desenvolvimento, foram necessárias habilidades na criação de banco de dados usando Prisma ORM; uma ferramenta para geração e manutenção de banco de dados diretamente pelo editor de código (VSCode). Para os testes foram utilizadas as bibliotecas JEST e Supertest. E ainda, visando o desenvolvimento mais avançado deste profissional, aplicou-se, sempre que o nível de conhecimento atual permitiu, o Desenvolvimento Direcionado à Testes (no original do inglês, TDD - Test Driven Development).
+The goal of this project is to develop the skill of creating integration tests. To it's development, there were needed skills on creating the database using Prisma ORM; a tool for generating and maintaining the databse directly through the code editor (VSCode). To the tests there were used the libs JEST and Supertest. And still, seeking for the highest development of this professional, it was applied, as often as the current knowledge allowed, the TDD - Test Driven Development.
 
 ## Summary
    - [Brief in](#brief-in)
@@ -26,18 +26,19 @@ Este projeto tem por objetivo desenvolver a habilidade de criação de testes de
 
 
 ## Brief in
-   Este projeto é uma API de provas. Com eles, alunos de uma instituição podem compartilhar entre si provas de diferentes períodos, professores e disciplinas.
+   This project is an API of tests and exams. With this API, students of any institutions may share among themselves tests from different semesters, teachers and disciplines.
 
 ***
 
 ## Introduction
-   Este é um projeto desenvolvido em TypeScript. Os testes foram desenvolvidos com Jest e Supertest. O banco de dados foi desenvolvido com Prisma. Suas entidades são:
-   - _users_: tabela de registro para os usuários do sistema. Cada pessoa deve se registrar antes de ter aceso as demais funcionalidades.
-   - _tests_: tabela que guarda as informações dos testes registrados pelos usuários.
-   - _teachers_: tabela para registro dos professores.
-   - _disciplines_: tabela para registros das disciplinas as quais os tests pertences.
-   - _categories_: tabela de registros das categorias as quais os testes podem pertencer.
-   - _teachersDisciplines_: tabela que registra qual professor(a) ministra qual disciplina.
+   This project was developed using TypeScript. Tests were developed with Jest and Supertest. Database was developed with Prisma. It's entities are:
+   
+   - _users_: table to register the users on the system. Each person must register first, in order to gain access to the project's features.
+   - _tests_: table that keeps the information os the tests and exams registered by the users.
+   - _teachers_: table to register the teachers' informations.
+   - _disciplines_: table to register the disciplines to wich the tests and exams belong.
+   - _categories_: table to register the categories to wich the tests may belong.
+   - _teachersDisciplines_: table to register wich teacher teaches wich discipline.
    
 ***
 
@@ -84,7 +85,7 @@ npm run dev
 
 ```yml
 POST /signup
-    - Rota para criar um novo usuário.
+    - Route to create a new user.
     - headers: {}
     - params: {}
     - query: {}
@@ -101,7 +102,7 @@ POST /signup
 
 ```yml
 POST /signin
-    - Rota para o usuário acessar sua conta.
+    - Route for the user to acces the system.
     - headers: {}
     - params: {}
     - query: {}
@@ -116,7 +117,7 @@ POST /signin
 
 ```yml
 POST /test
-    - Rota para o usuário adicionar uma nova prova ao sistema.
+    - Route for the user to add a new test/exam to the database.
     - headers: {Authorization: `Bearer token-created-with-jsonwebtoken`}
     - params: {}
     - query: {}
@@ -131,7 +132,7 @@ POST /test
 
 ```yml
 GET /tests/disciplines
-    - Rota para o usuário visualizar as provas separadas por disciplina.
+    - Route for the users to see the tests/exams grouped by period and discipline.
     - headers: {Authorization: `Bearer token-created-with-jsonwebtoken`}
     - params: {}
     - query: {}
@@ -244,7 +245,7 @@ GET /tests/disciplines
 
 ```yml
 GET /tests/teachers
-    - Rota para o usuário visualizar as provas separadas por professor.
+    - Route for the user to see the tests/exams grouped by teacher.
     - headers: {Authorization: `Bearer token-created-with-jsonwebtoken`}
     - params: {}
     - query: {}
@@ -354,4 +355,4 @@ GET /tests/teachers
     }
 ]
 ```
-###### [voltar para o sumário](#sumário)
+###### [back to summary](#summary)
