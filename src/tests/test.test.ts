@@ -49,7 +49,7 @@ describe(`
             teacherDisciplineId: test.teacherDisciplineId
         })
 
-        expect(response.statusCode).toBe(422)
+        expect(response.statusCode).toBe(422);
 
     })
 
@@ -64,6 +64,7 @@ describe(`
         })
 
         expect(response.statusCode).toBe(422);
+        console.log(response.error)
 
     })
 
