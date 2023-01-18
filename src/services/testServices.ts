@@ -45,7 +45,7 @@ async function getTestsGroupedByDiscipline() {
 
     let htmlCategories = []
     for (let e of aux) {
-        if(e.discipline === 'HTML e CSS'){
+        if (e.discipline === 'HTML e CSS') {
             htmlCategories.push({
                 category: e.category,
                 testName: e.testName,
@@ -61,7 +61,7 @@ async function getTestsGroupedByDiscipline() {
 
     let humildadeCategories = []
     for (let e of aux) {
-        if(e.discipline === 'Humildade'){
+        if (e.discipline === 'Humildade') {
             humildadeCategories.push({
                 category: e.category,
                 testName: e.testName,
@@ -77,7 +77,7 @@ async function getTestsGroupedByDiscipline() {
 
     let javaScriptCategories = []
     for (let e of aux) {
-        if(e.discipline === 'JavaScript'){
+        if (e.discipline === 'JavaScript') {
             javaScriptCategories.push({
                 category: e.category,
                 testName: e.testName,
@@ -93,7 +93,7 @@ async function getTestsGroupedByDiscipline() {
 
     let planejamentoCategories = []
     for (let e of aux) {
-        if(e.discipline === 'Planejamento'){
+        if (e.discipline === 'Planejamento') {
             planejamentoCategories.push({
                 category: e.category,
                 testName: e.testName,
@@ -109,7 +109,7 @@ async function getTestsGroupedByDiscipline() {
 
     let reactCategories = []
     for (let e of aux) {
-        if(e.discipline === 'React'){
+        if (e.discipline === 'React') {
             reactCategories.push({
                 category: e.category,
                 testName: e.testName,
@@ -125,7 +125,7 @@ async function getTestsGroupedByDiscipline() {
 
     let autoconfiancaCategories = []
     for (let e of aux) {
-        if(e.discipline === 'Autoconfiança'){
+        if (e.discipline === 'Autoconfiança') {
             autoconfiancaCategories.push({
                 category: e.category,
                 testName: e.testName,
@@ -166,35 +166,9 @@ async function getTestsGroupedByDiscipline() {
     return tests;
 }
 
-async function getTestsGroupedByTeacher() {
-    const response = await testRepository.findTests()
-
-    let aux = [];
-    for (let e of response) {
-        const element = {
-            teacher: e.teachersDisciplines.teachers.name,
-            term: e.teachersDisciplines.disciplines.terms.number,
-            discipline: e.teachersDisciplines.disciplines.name,
-            category: e.categories.name,
-            testName: e.name,
-            pdfUrl: e.pdfUrl
-        }
-        aux.push(element)
-    }
-
-    let brunaHamoriTests = [];
-    for (let e of aux){};
-
-    let diegoPinhoTests = [];
-    for(let e of aux){};
-
-    return aux;
-}
-
 export {
     checkCategoryId,
     checkTeacherDisciplineId,
     addTest,
-    getTestsGroupedByDiscipline,
-    getTestsGroupedByTeacher
+    getTestsGroupedByDiscipline
 }

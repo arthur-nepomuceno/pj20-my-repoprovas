@@ -28,17 +28,7 @@ async function getTestsGroupedByDiscipline(req: Request, res: Response) {
     return res.status(200).send(tests);
 }
 
-async function getTestsGroupedByTeachers(req: Request, res: Response) {
-    const token = req.headers.authorization.replace(/Bearer |'/g, '');
-    await checkToken(token);
-
-    const tests = await testServices.getTestsGroupedByTeacher()
-
-    return res.status(200).send(tests);
-}
-
 export {
     addTest,
-    getTestsGroupedByDiscipline,
-    getTestsGroupedByTeachers
+    getTestsGroupedByDiscipline
 }
